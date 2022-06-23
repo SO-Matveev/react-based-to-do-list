@@ -1,0 +1,7 @@
+.todo-item {
+  color: black;
+}
+.todo-item-completed {
+  color: #999;
+  text-decoration: line-through;
+}
