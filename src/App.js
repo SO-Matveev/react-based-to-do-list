@@ -1,23 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import "./components/AddItemForm";
+import AddItemForm from "./components/AddItemForm";
+
+const defaultItems = [{ id: 0, title: "купить хлеб", completed: false }];
 
 function App() {
+  const [items, setItems] = useState(defaultItems);
+  const handleSubmit = (title) => {
+    const newItems = {
+      id: items.length,
+      title,
+      completed: false,
+    };
+
+    setItems([...items, newItems]);
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <AddItemForm onSubmit={handleSubmit} />
+      {items.map((item) => (
+        <div>{item.title}</div>
+      ))}
     </div>
   );
 }
