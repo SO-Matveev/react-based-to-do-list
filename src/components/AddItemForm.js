@@ -1,7 +1,9 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
+
 function AddItemForm({ onSubmit }) {
   const [title, setTitle] = useState("");
+
   const handleSubmit = (event) => {
     event.preventDefault();
     onSubmit(title);

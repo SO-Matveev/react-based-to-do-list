@@ -1,49 +1,25 @@
-import { useState } from "react";
 import "./App.css";
-import "./components/AddItemForm";
-import AddItemForm from "./components/AddItemForm";
-import TodoItem from "./components/TodoItem";
-const defaultItems = [{ id: 0, title: "купить хлеб", completed: false }];
+import { Routes, Route, Link } from "react-router-dom";
+import Home from "./routes/Home";
+import Todo from "./routes/Todo";
 
 function App() {
-  const [items, setItems] = useState(defaultItems);
-  const handleSubmit = (title) => {
-    const newItems = {
-      id: items.length,
-      title,
-      completed: false,
-    };
-
-    setItems([...items, newItems]);
-  };
-
-  const handleItemComplete = (clickedItem) => {
-    const newItems = items.map((item) => {
-      if (item.id === clickedItem.id) {
-        return {
-          ...item,
-          completed: !item.completed,
-        };
-      }
-      return item;
-    });
-    setItems(newItems);
-  };
-  const handleItemDelete = (clickedItem) => {
-    const newItem = items.filter((item) => item.id !== clickedItem.id);
-    setItems(newItem);
-  };
   return (
     <div>
-      <AddItemForm onSubmit={handleSubmit} />
-      {items.map((item) => (
-        <TodoItem
-          key={item.id}
-          item={item}
-          onComplete={() => handleItemComplete(item)}
-          onDelete={() => handleItemDelete(item)}
-        />
-      ))}
+      <nav>
+        <ul>
+          <li>
+            <Link to="Home">Главная страница</Link>
+          </li>
+          <li>
+            <Link to="/Todo">Список</Link>
+          </li>
+        </ul>
+      </nav>
+      <Routes>
+        <Route path="Home" element={<Home />} />
+        <Route path="Todo" element={<Todo />} />
+      </Routes>
     </div>
   );
 }
